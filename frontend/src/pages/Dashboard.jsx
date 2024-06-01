@@ -11,12 +11,9 @@ export const Dashboard = () => {
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
-
-    // Check if token exists in local storage
     if (!userToken) {
-      navigate("/signin"); // Redirect to sign-in page if token doesn't exist
+      navigate("/signin"); 
     } else {
-      // Fetch balance if token exists
       axios
         .get(import.meta.env.VITE_SERVER_URL + "/api/v1/account/balance", {
           headers: {
@@ -35,7 +32,7 @@ export const Dashboard = () => {
   return (
     <div>
       <Appbar />
-      <div className="m-8">
+      <div className="m-5">
         <Balance value={bal} />
         <Users />
       </div>

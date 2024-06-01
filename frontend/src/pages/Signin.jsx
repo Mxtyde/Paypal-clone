@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { BottomWarning } from "../components/BottomWarning";
 import { Button } from "../components/Button";
-import { Heading } from "../components/Heading";
 import { InputBox } from "../components/InputBox";
-import { SubHeading } from "../components/SubHeading";
 import { useEffect, useState } from "react";
+import Pp_logo from "../images/Pp_logo.png";
 import axios from "axios";
 
 export const Signin = () => {
@@ -15,33 +13,34 @@ export const Signin = () => {
   useEffect(() => {
     const userToken = localStorage.getItem("token");
 
-    // Check if token exists in local storage
+    
     if (userToken) {
-      navigate("/dashboard"); // Redirect to sign-in page if token doesn't exist
+      navigate("/dashboard"); 
     }
-  }, []);
+  }, [navigate]);
 
   return (
-    <div className="bg-slate-300 h-screen flex justify-center">
-      <div className="flex flex-col justify-center">
-        <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
-          <Heading label={"Sign in"} />
-          <SubHeading label={"Enter your credentials to access your account"} />
+    <div className="bg-white h-screen flex justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
+        <div className="rounded-lg text-card-foreground shadow-lg bg-white border-2 border-gray-200 w-96 text-center p-8 h-max">
+          <img src={Pp_logo} alt="" className=" h-16 mb-4" style={{marginLeft:'110px'}} />
+          <div className="text-gray-400"><b>Sign In</b></div>
           <InputBox
             onChange={(e) => {
               setUsername(e.target.value);
             }}
             placeholder="Email"
-            label={"Email"}
+            className="text-lg py-10 px-10 w-15 mb-5"
+            style={{padding:'12px',fontSize:'16px'}}
           />
           <InputBox
             onChange={(e) => {
               setPassword(e.target.value);
             }}
             placeholder="Password"
-            label={"Password"}
+            className="text-lg py-3 px-4 mb-4"
           />
-          <div className="pt-4">
+          <div className="pt-4 w-full">
             <Button
               onClick={async () => {
                 const response = await axios.post(
@@ -55,12 +54,16 @@ export const Signin = () => {
                 navigate("/dashboard");
               }}
               label={"Sign in"}
+              className="w-full text-lg py-3"
             />
           </div>
-          <BottomWarning
-            label={"Don't have an account?"}
-            buttonText={"Sign up"}
-            to={"/signup"}
+          <div className="text-gray-400 mt-2 mb-2"> ──────────── or ──────────── </div>
+          <Button
+            className="bg-blue-700"
+            onClick={()=>{
+              navigate('/signup')
+            }}
+            label={"Sign up"}
           />
         </div>
       </div>

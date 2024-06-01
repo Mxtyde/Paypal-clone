@@ -50,7 +50,7 @@ router.post("/signup", async (req, res) => {
 
   await Account.create({
     userId,
-    balance: parseInt(Math.random() * 10000),
+    balance: parseInt(5000),
   });
 
   // -----  -----
